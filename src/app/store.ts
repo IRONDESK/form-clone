@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import Preview from "../store/Preview";
 
 export const store = configureStore({
   reducer: {
-    // posts: postsReducer,
+    Preview,
   },
 });
 
