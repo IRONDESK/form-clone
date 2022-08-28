@@ -1,11 +1,12 @@
-import "react-app-polyfill/stable"
-import "./styles/global.css"
-import ReactDOM from "react-dom"
-import Routes from "./Routes"
+import "./styles/global.css";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import Routes from "./Routes";
 
-ReactDOM.render(
-  <>
+const container = document.getElementById("root");
+const root = createRoot(container!);
+root.render(
+  <StrictMode>
     <Routes />
-  </>,
-  document.getElementById("root")
-)
+  </StrictMode>
+);
