@@ -81,7 +81,7 @@ const Delete = styled.button`
   }
 `;
 const Swap = styled.div`
-  flex: 1;
+  width: 76px;
   button {
     margin: 0 2px;
     padding: 1px 0;

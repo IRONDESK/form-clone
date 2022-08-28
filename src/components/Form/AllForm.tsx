@@ -6,7 +6,7 @@ import Item from "./Item";
 
 function MakeForm() {
   const { register, handleSubmit, control, watch }: any = useForm({
-    mode: "onSubmit",
+    mode: "onBlur",
     defaultValues: {
       title: "제목이 없는 설문지",
       explain: "",
@@ -22,7 +22,7 @@ function MakeForm() {
     },
   });
   /// fieldarray
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, insert } = useFieldArray({
     control,
     name: "items",
   });
@@ -62,7 +62,8 @@ function MakeForm() {
             <Item
               itemIndex={index}
               itemRemove={remove}
-              itemLength={fields.length}
+              itemFields={fields}
+              itemInsert={insert}
               order={index}
               watch={watch}
               register={register}
