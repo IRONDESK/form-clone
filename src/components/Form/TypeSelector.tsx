@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/constants";
 
-function TypeSelector({ setValue, register, order }: any) {
+function TypeSelector(setValue: any, order: string) {
   const [TypeValue, setTypeValue] = useState("radio");
   const [isShow, setIsShow] = useState(false);
 
@@ -76,9 +76,6 @@ const Background = styled.div`
 const Wrap = styled.div`
   flex: 0.7;
   position: relative;
-`;
-const Hide = styled.input`
-  /* display: none; */
 `;
 const Selector = styled.button`
   display: flex;

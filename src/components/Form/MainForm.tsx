@@ -16,22 +16,23 @@ function MainForm() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, control, watch, setValue }: any = useForm({
-    mode: "onChange",
-    defaultValues: {
-      title: "제목이 없는 설문지",
-      explain: "",
-      items: [
-        {
-          question: "",
-          type: "radio",
-          option: ["새로운 옵션"],
-          isDefault: false,
-          hasEtc: false,
-        },
-      ],
-    },
-  });
+  const { register, handleSubmit, control, watch, setValue } =
+    useForm<IPollDataInfo>({
+      mode: "onChange",
+      defaultValues: {
+        title: "제목이 없는 설문지",
+        explain: "",
+        items: [
+          {
+            question: "",
+            type: "radio",
+            option: ["새로운 옵션"],
+            isDefault: false,
+            hasEtc: false,
+          },
+        ],
+      },
+    });
   /// fieldarray
   const { fields, append, remove, insert } = useFieldArray({
     control,
@@ -108,7 +109,13 @@ function MainForm() {
           className="action-button"
           type="button"
           onClick={() =>
-            append({ question: "", type: "radio", option: ["새로운 옵션"] })
+            append({
+              question: "",
+              type: "radio",
+              option: ["새로운 옵션"],
+              isDefault: false,
+              hasEtc: false,
+            })
           }
         >
           <i className="material-icons">add</i>질문 추가

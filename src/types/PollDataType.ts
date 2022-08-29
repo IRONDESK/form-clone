@@ -6,7 +6,7 @@ export interface IPollDataInfo {
     {
       question: string;
       type: string;
-      option: [];
+      option: string[];
       isDefault: boolean;
       hasEtc: boolean;
     }

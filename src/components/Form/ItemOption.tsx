@@ -1,5 +1,16 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/constants";
+import { UseFormRegister, FieldValues } from "react-hook-form";
+
+interface IUseFormType {
+  fields: string[];
+  type: string;
+  order: number;
+  index: number;
+  register: UseFormRegister<FieldValues>;
+  swap: any;
+  remove: any;
+}
 
 function ItemOption({
   fields,
@@ -9,7 +20,7 @@ function ItemOption({
   swap,
   remove,
   register,
-}: any) {
+}: IUseFormType) {
   return (
     <Container>
       <TypeIcon type={type}>{type === "drop" && index + 1 + "."}</TypeIcon>
