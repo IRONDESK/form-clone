@@ -147,7 +147,8 @@ const Title = styled.section`
     font-weight: 700;
   }
   #explain {
-    font-size: 1.2rem;
+    margin-top: 12px;
+    font-size: 1.05rem;
   }
 `;
 const Contents = styled.section`
