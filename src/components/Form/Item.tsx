@@ -21,13 +21,14 @@ function Item({
   });
   const TypeWatch = watch(`items.${order}.type`);
   const hasEtcWatch = watch(`items.${order}.hasEtc`);
+
   return (
     <Container>
       <ItemHead>
         <Question
           type="text"
           placeholder="질문을 입력해주세요"
-          {...register(`items.${order}.question`)}
+          {...register(`items.${order}.question`, { required: true })}
         />
         <TypeSelector setValue={setValue} register={register} order={order} />
       </ItemHead>

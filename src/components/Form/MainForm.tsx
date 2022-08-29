@@ -16,23 +16,29 @@ function MainForm() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, control, watch, setValue } =
-    useForm<IPollDataInfo>({
-      mode: "onChange",
-      defaultValues: {
-        title: "제목이 없는 설문지",
-        explain: "",
-        items: [
-          {
-            question: "",
-            type: "radio",
-            option: ["새로운 옵션"],
-            isDefault: false,
-            hasEtc: false,
-          },
-        ],
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<IPollDataInfo>({
+    mode: "onChange",
+    defaultValues: {
+      title: "제목이 없는 설문지",
+      explain: "",
+      items: [
+        {
+          question: "",
+          type: "radio",
+          option: ["새로운 옵션"],
+          isDefault: false,
+          hasEtc: false,
+        },
+      ],
+    },
+  });
   /// fieldarray
   const { fields, append, remove, insert } = useFieldArray({
     control,
@@ -65,6 +71,12 @@ function MainForm() {
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {errors.items ? (
+        <StickyMsg>
+          <i className="material-icons">warning</i>
+          필수로 입력해야 하는 칸이 비어있습니다.
+        </StickyMsg>
+      ) : null}
       <Title>
         <div></div>
         <article>
@@ -136,6 +148,15 @@ function MainForm() {
 }
 
 const Form = styled.form``;
+const StickyMsg = styled.article`
+  position: sticky;
+  display: flex;
+  align-items: center;
+  margin: 0 0 -12px;
+  padding: 12px 16px;
+  top: 0;
+  background-color: #ffc42e;
+`;
 const Title = styled.section`
   margin: 32px 20px 0;
   box-shadow: 0 6px 8px 2px rgba(0, 0, 0, 0.1);
