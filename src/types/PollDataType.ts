@@ -1,4 +1,5 @@
 export interface IPollDataInfo {
+  pollId?: string;
   title: string;
   explain?: string;
   items: [

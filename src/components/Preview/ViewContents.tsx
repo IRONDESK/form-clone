@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
@@ -9,6 +10,7 @@ import usePreview from "../../hooks/usePreview";
 import ItemCard from "./ItemCard";
 
 function ViewContents() {
+  const location = useLocation();
   const { data } = usePreview();
   const {
     register,
@@ -49,7 +51,9 @@ function ViewContents() {
   return (
     <>
       <StickyMsg type="preview">
-        이 창은 설문조사 미리보기 화면입니다.
+        {location.pathname === "/"
+          ? "응답 제출 내용이 콘솔창에 보여집니다."
+          : "이 창은 설문조사 미리보기 화면입니다."}
         <i className="material-icons" onClick={CloseModal}>
           close
         </i>

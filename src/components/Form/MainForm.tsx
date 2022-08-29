@@ -1,16 +1,23 @@
 import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { CreatePreview } from "../../store/Preview";
 
 import { COLOR } from "../../styles/constants";
+import { IPollDataInfo } from "../../types/PollDataType";
 import Item from "./Item";
 
-function MakeForm() {
+function MainForm() {
+  // 설문조사의 난수 ID를 만들기 위한 변수
+  const date = new Date();
+  const random = Math.random();
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit, control, watch, setValue }: any = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       title: "제목이 없는 설문지",
       explain: "",
@@ -31,17 +38,22 @@ function MakeForm() {
     name: "items",
   });
 
-  const onSubmit = (data: any) => {
-    let getData = JSON.parse(localStorage.getItem("saved") ?? `[]`);
-    console.log(getData);
-    if (getData.length === 0) {
-      localStorage.setItem("saved", JSON.stringify([data]));
-    } else {
-      localStorage.removeItem("saved");
-      localStorage.setItem("saved", JSON.stringify([...getData, data]));
+  const onSubmit = (data: IPollDataInfo) => {
+    data = { ...data, pollId: `${date.toLocaleString("ja")}${random * 10}` };
+    // eslint-disable-next-line no-restricted-globals
+    const isSave = confirm(`${date.toLocaleString()} \n 저장하시겠습니까?`);
+    if (isSave) {
+      let getData = JSON.parse(localStorage.getItem("saved") ?? `[]`);
+      if (getData.length === 0) {
+        localStorage.setItem("saved", JSON.stringify([data]));
+      } else {
+        localStorage.removeItem("saved");
+        localStorage.setItem("saved", JSON.stringify([...getData, data]));
+      }
+      navigate("/");
     }
   };
-  const onPreview = (data: any) => {
+  const onPreview = (data: IPollDataInfo) => {
     dispatch(
       CreatePreview({
         title: data.title,
@@ -196,4 +208,4 @@ const FormActions = styled.section`
     font-weight: bold;
   }
 `;
-export default MakeForm;
+export default MainForm;

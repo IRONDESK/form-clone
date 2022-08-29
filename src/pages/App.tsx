@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 import { COLOR } from "../styles/constants";
+
+import usePreview from "../hooks/usePreview";
+import ViewContents from "../components/Preview/ViewContents";
 import List from "../components/Main/List";
 
 function App() {
+  const { data } = usePreview();
   return (
     <>
       <Main>
@@ -18,6 +21,11 @@ function App() {
           </Link>
           <List />
         </Section>
+        {data?.title ? (
+          <Preview>
+            <ViewContents />
+          </Preview>
+        ) : null}
       </Main>
     </>
   );
@@ -65,5 +73,17 @@ const Create = styled.button`
     border: 2px solid ${COLOR.vermilion};
     color: ${COLOR.vermilion};
   }
+`;
+
+const Preview = styled.section`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 768px;
+  height: 90vh;
+  background-color: #fff;
+  border: 2px solid #999;
+  transform: translate(-50%, -50%);
+  overflow-y: scroll;
 `;
 export default App;

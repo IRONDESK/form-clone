@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 import usePreview from "../hooks/usePreview";
-import MakeForm from "../components/Form/AllForm";
+import MainForm from "../components/Form/MainForm";
 import ViewContents from "../components/Preview/ViewContents";
 
 function Create() {
   const { data } = usePreview();
   return (
     <Container>
-      <MakeForm />
+      <MainForm />
       {data?.title ? (
         <Preview>
           <ViewContents />
