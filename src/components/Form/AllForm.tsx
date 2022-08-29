@@ -32,7 +32,14 @@ function MakeForm() {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    let getData = JSON.parse(localStorage.getItem("saved") ?? `[]`);
+    console.log(getData);
+    if (getData.length === 0) {
+      localStorage.setItem("saved", JSON.stringify([data]));
+    } else {
+      localStorage.removeItem("saved");
+      localStorage.setItem("saved", JSON.stringify([...getData, data]));
+    }
   };
   const onPreview = (data: any) => {
     dispatch(
