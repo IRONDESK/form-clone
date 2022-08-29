@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/constants";
 
-function TypeSelector({ register, order }: any) {
+function TypeSelector({ setValue, register, order }: any) {
   const [TypeValue, setTypeValue] = useState("radio");
   const [isShow, setIsShow] = useState(false);
+
   const TypeStyle = (value: string) => {
     switch (value) {
       case "radio":
@@ -24,6 +25,7 @@ function TypeSelector({ register, order }: any) {
   const SelectTypeValue = (value: string) => {
     setTypeValue(value);
     setIsShow(!isShow);
+    setValue(`items.${order}.type`, value);
   };
   return (
     <>
@@ -59,12 +61,6 @@ function TypeSelector({ register, order }: any) {
             </li>
           </Container>
         ) : null}
-        <Hide
-          type="text"
-          value={TypeValue}
-          disabled
-          {...register(`items.${order}.type`)}
-        />
       </Wrap>
     </>
   );
@@ -82,7 +78,7 @@ const Wrap = styled.div`
   position: relative;
 `;
 const Hide = styled.input`
-  display: none;
+  /* display: none; */
 `;
 const Selector = styled.button`
   display: flex;

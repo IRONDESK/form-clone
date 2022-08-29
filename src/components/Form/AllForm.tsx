@@ -1,11 +1,15 @@
 import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { CreatePreview } from "../../store/Preview";
+
 import { COLOR } from "../../styles/constants";
 import Item from "./Item";
 
 function MakeForm() {
-  const { register, handleSubmit, control, watch }: any = useForm({
+  const dispatch = useDispatch();
+  const { register, handleSubmit, control, watch, setValue }: any = useForm({
     mode: "onBlur",
     defaultValues: {
       title: "제목이 없는 설문지",
@@ -31,7 +35,13 @@ function MakeForm() {
     console.log(data);
   };
   const onPreview = (data: any) => {
-    console.log("미리보기", data);
+    dispatch(
+      CreatePreview({
+        title: data.title,
+        explain: data.explain,
+        items: data.items,
+      })
+    );
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -60,6 +70,7 @@ function MakeForm() {
         {fields.map((item, index) => (
           <ItemWrap key={index}>
             <Item
+              setValue={setValue}
               itemIndex={index}
               itemRemove={remove}
               itemFields={fields}

@@ -34,12 +34,15 @@ function ItemOption({
       <Swap>
         {index === 0 ? null : (
           <button type="button" onClick={() => swap(index, index - 1)}>
-            <img src="/icons/expand_less_black_24dp.svg" alt="삭제" />
+            <img src="/icons/expand_less_black_24dp.svg" alt="옵션 위치 위로" />
           </button>
         )}
         {index === fields.length - 1 ? null : (
           <button type="button" onClick={() => swap(index, index + 1)}>
-            <img src="/icons/expand_more_black_24dp.svg" alt="삭제" />
+            <img
+              src="/icons/expand_more_black_24dp.svg"
+              alt="옵션 위치 아래로"
+            />
           </button>
         )}
       </Swap>

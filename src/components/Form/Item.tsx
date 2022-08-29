@@ -5,6 +5,7 @@ import TypeSelector from "./TypeSelector";
 
 function Item({
   order,
+  setValue,
   itemIndex,
   itemRemove,
   itemFields,
@@ -28,7 +29,7 @@ function Item({
           placeholder="질문을 입력해주세요"
           {...register(`items.${order}.question`)}
         />
-        <TypeSelector register={register} order={order} />
+        <TypeSelector setValue={setValue} register={register} order={order} />
       </ItemHead>
       {TypeWatch === "radio" ||
       TypeWatch === "select" ||
