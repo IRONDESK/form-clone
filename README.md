@@ -1,5 +1,12 @@
 # 구글 폼 클론
 
+##  실행 방법
+* 파일 설치 후, 설치된 디렉토리의 터미널에 아래 명령어를 차례대로 입력해주세요.
+```cli
+yarn
+yarn run start
+```
+
 ## 사용 스택
  * React with TypeScript
  * styled-components
