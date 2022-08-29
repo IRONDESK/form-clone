@@ -34,55 +34,62 @@ function Item({
       {TypeWatch === "radio" ||
       TypeWatch === "select" ||
       TypeWatch === "drop" ? (
-        <OptionWrap>
-          {fields?.map((item: any, index: number) => (
-            <ItemOption
-              key={index}
-              type={TypeWatch}
-              fields={fields}
-              order={order}
-              index={index}
-              swap={swap}
-              remove={remove}
-              register={register}
-            />
-          ))}
-        </OptionWrap>
-      ) : null}
-      <AddOptionWrap>
-        {hasEtcWatch ? (
-          <AddOption>
-            <TypeIcon type={TypeWatch}>
-              {TypeWatch === "drop" && fields.length + 1 + "."}
-            </TypeIcon>{" "}
-            <input type="text" value="기타..." disabled />
-            <label id="del-etc-btn" htmlFor="add-etc-box">
-              <img src="/icons/clear_black_24dp.svg" alt="삭제" />
-            </label>
-          </AddOption>
-        ) : null}
-        <AddOption>
-          <TypeIcon type={TypeWatch}>
-            {TypeWatch === "drop" && fields.length + 1 + "."}
-          </TypeIcon>{" "}
-          <span
-            className="add-basic-option"
-            onClick={() => append(["새로운 옵션"])}
-          >
-            옵션 추가{" "}
-          </span>{" "}
-          또는
-          <label className="add-etc-option">
-            {" "}
-            '기타' 추가
-            <input
-              type="checkbox"
-              id="add-etc-box"
-              {...register(`items.${order}.hasEtc`)}
-            />
-          </label>
-        </AddOption>
-      </AddOptionWrap>
+        <>
+          <OptionWrap>
+            {fields?.map((item: any, index: number) => (
+              <ItemOption
+                key={index}
+                type={TypeWatch}
+                fields={fields}
+                order={order}
+                index={index}
+                swap={swap}
+                remove={remove}
+                register={register}
+              />
+            ))}
+          </OptionWrap>
+
+          <AddOptionWrap>
+            {hasEtcWatch ? (
+              <AddOption>
+                <TypeIcon type={TypeWatch}>
+                  {TypeWatch === "drop" && fields.length + 1 + "."}
+                </TypeIcon>{" "}
+                <input type="text" value="기타..." disabled />
+                <label id="del-etc-btn" htmlFor="add-etc-box">
+                  <img src="/icons/clear_black_24dp.svg" alt="삭제" />
+                </label>
+              </AddOption>
+            ) : null}
+            <AddOption>
+              <TypeIcon type={TypeWatch}>
+                {TypeWatch === "drop" && fields.length + 1 + "."}
+              </TypeIcon>{" "}
+              <span
+                className="add-basic-option"
+                onClick={() => append(["새로운 옵션"])}
+              >
+                옵션 추가{" "}
+              </span>{" "}
+              또는
+              <label className="add-etc-option">
+                {" "}
+                '기타' 추가
+                <input
+                  type="checkbox"
+                  id="add-etc-box"
+                  {...register(`items.${order}.hasEtc`)}
+                />
+              </label>
+            </AddOption>
+          </AddOptionWrap>
+        </>
+      ) : (
+        <AddOptionWrap>
+          <LongShortText>응답 영역</LongShortText>
+        </AddOptionWrap>
+      )}
       <ItemSetting>
         <li>
           <button
@@ -192,6 +199,15 @@ const AddOption = styled.li`
       opacity: 1;
     }
   }
+`;
+
+const LongShortText = styled.div`
+  cursor: default;
+  margin: 24px;
+  padding: 8px 4px;
+  border-bottom: 1px solid ${COLOR.middleGrey};
+  font-size: 1.1rem;
+  color: #888;
 `;
 
 const TypeIcon = styled.div<{ type: string }>`
