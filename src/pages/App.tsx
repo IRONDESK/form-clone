@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { COLOR } from "../styles/constants";
+import List from "../components/Main/List";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Link to="/create">
             <Create>새로 만들기</Create>
           </Link>
+          <List />
         </Section>
       </Main>
     </>
