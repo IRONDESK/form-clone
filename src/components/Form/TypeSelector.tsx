@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/constants";
 
-function TypeSelector(setValue: any, order: string) {
+function TypeSelector({ setValue, order }: any) {
   const [TypeValue, setTypeValue] = useState("radio");
   const [isShow, setIsShow] = useState(false);
 
